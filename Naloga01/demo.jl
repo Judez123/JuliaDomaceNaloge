@@ -8,7 +8,6 @@ y = sin.(x)
 # Izračunamo zlepek
 Z = interpoliraj(x, y)
 
-# Narišemo
 p = plot(Z)
 
 savefig(p, "zlepek_sinus.png")
