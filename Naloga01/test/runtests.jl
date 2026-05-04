@@ -1,0 +1,29 @@
+using Test
+using Naloga01
+
+@testset "Naravni Zlepek Testi" begin
+    # 1. Test: Preprosta premica y = 2x
+    x_premica = [0.0, 1.0, 2.0, 3.0]
+    y_premica = 2.0 .* x_premica
+    Z_premica = interpoliraj(x_premica, y_premica)
+    
+    @testset "Test premice" begin
+        # Za premico morajo biti drugi in tretji odvodi (c in d) enaki nič
+        @test all(isapprox.(Z_premica.c, 0.0, atol=1e-10))
+        @test all(isapprox.(Z_premica.d, 0.0, atol=1e-10))
+        # Vrednosti se morajo ujemati
+        @test vrednost(Z_premica, 1.5) ≈ 3.0
+    end
+
+    # 2. Test: Poljubna funkcija (sinus)
+    x_sin = collect(0:0.5:pi)
+    y_sin = sin.(x_sin)
+    Z_sin = interpoliraj(x_sin, y_sin)
+
+    @testset "Interpolacijski pogoj" begin
+        # Zlepek mora v podanih točkah x vrniti točno vrednost y
+        for i in 1:length(x_sin)
+            @test vrednost(Z_sin, x_sin[i]) ≈ y_sin[i]
+        end
+    end
+end
