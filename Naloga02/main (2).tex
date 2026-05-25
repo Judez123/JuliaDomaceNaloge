@@ -33,15 +33,16 @@ Za splošni interval $[x_i, x_{i+1}]$ dolžine $h$ pravilo prevedemo z uvedbo no
 kjer sta $x_{i,1}$ in $x_{i,2}$ vozlišči, preslikani na podinterval.
 
 \subsection{Ocena napake}
-Teoretična napaka $R_f$ za osnovno pravilo na intervalu $[-1, 1]$ je:
+Teoretična napaka $R_f$ za osnovno Gauss-Legendrovo pravilo na dveh točkah za interval $[-1, 1]$ je podana z izrazom:
 \begin{equation}
-    R_f = \frac{f^{(4)}(\eta)}{135}
+    R_f = \frac{f^{(4)}(\eta)}{135}, \quad \eta \in (-1, 1).
 \end{equation}
-Pri sestavljenem pravilu z $n$ podintervali dolžine $h = \frac{b-a}{n}$ se napaka sešteje. Celotna napaka sestavljene metode je reda $O(h^4)$ in znaša:
+Ocena je povzeta po literaturi \cite{orel2004} (str. 132). Formulo izpeljemo s pomočjo Hermiteovega interpolacijskega polinoma, kjer izkoristimo lastnost, da je Gauss-Legendrovo pravilo z $n$ točkami eksaktno za vse polinome stopnje $2n-1$ ali manj. V našem primeru ($n=2$) je pravilo eksaktno za polinome stopnje 3, zato je vodilni člen napake povezan s četrtim odvodom funkcije $f$.
+
+Pri sestavljenem pravilu z $n$ podintervali dolžine $h = \frac{b-a}{n}$ se napaka na celotnem intervalu $[a, b]$ poenostavi v:
 \begin{equation}
-    R_{f, \text{sest}} = -\frac{(b-a)h^4}{4320} f^{(4)}(\eta)
+    R_{f, \text{sest}} = -\frac{(b-a)h^4}{4320} f^{(4)}(\eta).
 \end{equation}
-Zaradi četrte stopnje napake je metoda izjemno učinkovita za gladke funkcije, kot je $\text{sinc}(x)$.
 
 \section{Implementacija in rezultati}
 Naloga je implementirana v jeziku Julia v obliki paketa \texttt{Naloga02}. Za določanje števila korakov smo uporabili metodo podvajanja števila intervalov (Double-Step method). Napako smo ocenili s pomočjo Rungejevega pravila:
@@ -78,5 +79,18 @@ Za dosego natančnosti $10^{-10}$ smo potrebovali 128 podintervalov. Ker na vsak
 
 \section{Zaključek}
 Sestavljeno Gauss-Legendrovo pravilo se je izkazalo za zelo robustno. Kljub majhnemu številu točk smo hitro dosegli visoko natančnost, kar potrjuje teoretična pričakovanja o metodi reda $O(h^4)$. Koda je preverjena z enotskimi testi na polinomih stopnje 3, kjer metoda vrne eksaktne rezultate.
+
+\begin{thebibliography}{9}
+
+\bibitem{textbook} 
+M. Vuk, \textit{Navodila za pripravo domačih nalog in opisi nalog (poglavja 17 in 18)}, Učbenik za numerične metode, 2026.
+
+\bibitem{orel2004}
+B. Orel, \textit{Osnove numerične matematike}, Fakulteta za računalništvo in informatiko, 2004.
+
+\bibitem{plestenjak2015}
+B. Plestenjak, \textit{Razširjen uvod v numerične metode}, DMFA - založništvo, 2015.
+
+\end{thebibliography}
 
 \end{document}
