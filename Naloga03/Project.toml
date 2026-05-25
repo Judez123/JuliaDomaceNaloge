@@ -1,0 +1,16 @@
+name = "Naloga03"
+uuid = "c059c3ef-78fd-424e-a6e7-c353c3b768fb"
+version = "0.1.0"
+authors = ["Anze Judez <anze.judez@gmail.com>"]
+
+[deps]
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
+SpecialFunctions = "276daf66-3868-5448-9aa4-cd146d93841b"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[compat]
+LinearAlgebra = "1.12.0"
+Plots = "1.41.6"
+SpecialFunctions = "2.7.2"
+Test = "1.11.0"
